@@ -37,7 +37,8 @@ def range(a, b=None, c=None):
         max_val = min_val
         min_val = 0
     current = min_val
-    yield min_val
+    if max_val > 0:
+        yield min_val
     while current < max_val - step:
         current += step
         yield current

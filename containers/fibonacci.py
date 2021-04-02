@@ -62,6 +62,12 @@ class Fib:
     '''
     def __init__(self, n=None):
         self.n = n
+    
+    def __repr__(self, n=None):
+        if n is None:
+            return "Fib()"
+        else:
+            return "Fib(" + str(n) + ")"
 
     def __iter__(self):
         return FibIter(self.n)
