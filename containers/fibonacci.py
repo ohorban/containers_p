@@ -1,10 +1,3 @@
-
-################################################################################
-# example fibonacci number code;
-# you do not have to modify this code in any way
-################################################################################
-
-
 def fibs(n):
     '''
     This function computes the first n fibonacci numbers.
@@ -46,12 +39,6 @@ def fib(n):
     return f2
 
 
-################################################################################
-# fibonacci number code using generators;
-# you will need to implement the functions below
-################################################################################
-
-
 class Fib:
     '''
     This class represents all the fibonacci numbers,
@@ -62,7 +49,7 @@ class Fib:
     '''
     def __init__(self, n=None):
         self.n = n
-    
+
     def __repr__(self, n=None):
         if n is None:
             return "Fib()"
