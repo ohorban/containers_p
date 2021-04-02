@@ -36,7 +36,6 @@ def range(a, b=None, c=None):
     if max_val is None:
         max_val = min_val
         min_val = 0
-    
     current = min_val
     yield min_val
     while current < max_val - step:

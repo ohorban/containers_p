@@ -119,4 +119,3 @@ def fib_yield(n=None):
             second = third
             yield third
             n -= 1
-
