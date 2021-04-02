@@ -51,10 +51,10 @@ class Fib:
         self.n = n
 
     def __repr__(self, n=None):
-        if n is None:
+        if self.n is None:
             return "Fib()"
         else:
-            return "Fib(" + str(n) + ")"
+            return "Fib(" + str(self.n) + ")"
 
     def __iter__(self):
         return FibIter(self.n)

@@ -20,8 +20,10 @@ def range(a, b=None, c=None):
         max_val = min_val
         min_val = 0
     current = min_val
-    if max_val > 0:
+    if (max_val > min_val and step > 0) or (max_val < min_val and step < 0):
         yield min_val
-    while current < max_val - step:
-        current += step
-        yield current
+        while current < max_val - step:
+            current += step
+            yield current
+    else:
+        pass
