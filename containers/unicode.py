@@ -1,6 +1,5 @@
 import unicodedata
 
-#This is a test
 class NormalizedStr:
     '''
     By default, Python's str type stores any valid unicode string.
