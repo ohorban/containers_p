@@ -20,7 +20,7 @@ class NormalizedStr:
     '''
 
     def __init__(self, text, normal_form='NFC'):
-        text = unicodedata.normalize("NFC", text)
+        self.text = unicodedata.normalize("NFC", text)
 
     def __repr__(self):
         '''
