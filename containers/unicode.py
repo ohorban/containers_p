@@ -28,7 +28,7 @@ class NormalizedStr:
         The string returned by the __repr__ function should be valid python code
         that can be substituted directly into the python interpreter to reproduce an equivalent object.
         '''
-        return "NormalizedStr(" + self.text + ", " + self.normal_form + ")"
+        return "NormalizedStr('" + self.text + "', '" + self.normal_form + "')"
 
     def __str__(self):
         '''
@@ -42,7 +42,7 @@ class NormalizedStr:
         Returns the length of the string.
         The expression `len(a)` desugars to a.__len__().
         '''
-        return len(unicodedata.normalize(self.normal_form, self.text)
+        return len(unicodedata.normalize(self.normal_form, self.text))
 
     def __contains__(self, substr):
         '''
@@ -82,7 +82,8 @@ class NormalizedStr:
         The addition of two normalized strings is not guaranteed to stay normalized.
         Therefore, you must renormalize the strings after adding them together.
         '''
-        return self.text + unicodedata.normalize(self.normal_form, b)
+        string = unicodedata.normalize(self.normal_form, self.text + str(b))
+        return NormalizedStr(string)
 
     def __iter__(self):
         '''
@@ -91,9 +92,18 @@ class NormalizedStr:
         You'll need to define your own iterator class with the appropriate magic methods,
         and return an instance of that class here.
         '''
-        return NormalizedItr(self)
+        return NormalizedItr(self.text)
 
 
 class NormalizedItr:
-    def __innit__(self):
-        pass
+    def __init__(self, text):
+        self.text = text
+        self.count = 0
+
+    def __next__(self):
+        if len(self.text) <= self.count:
+            raise StopIteration
+        else:
+            char = self.text[self.count]
+            self.count += 1
+            return char
