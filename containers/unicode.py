@@ -1,5 +1,6 @@
 import unicodedata
 
+
 class NormalizedStr:
     '''
     By default, Python's str type stores any valid unicode string.
@@ -26,7 +27,7 @@ class NormalizedStr:
         The string returned by the __repr__ function should be valid python code
         that can be substituted directly into the python interpreter to reproduce an equivalent object.
         '''
-         return ascii(self.text)
+        return ascii(self.text)
 
     def __str__(self):
         '''
@@ -90,6 +91,7 @@ class NormalizedStr:
         and return an instance of that class here.
         '''
         return NormalizedItr()
+
 
 class NormalizedItr:
     pass
