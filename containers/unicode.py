@@ -91,9 +91,9 @@ class NormalizedStr:
         You'll need to define your own iterator class with the appropriate magic methods,
         and return an instance of that class here.
         '''
-        return NormalizedItr()
+        return NormalizedItr(self)
 
 
 class NormalizedItr:
-    def __innit__():
+    def __innit__(self):
         pass
