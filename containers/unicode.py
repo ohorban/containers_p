@@ -20,28 +20,28 @@ class NormalizedStr:
     '''
 
     def __init__(self, text, normal_form='NFC'):
-        text = text
+        text = unicodedata.normalize("NFC", text)
 
     def __repr__(self):
         '''
         The string returned by the __repr__ function should be valid python code
         that can be substituted directly into the python interpreter to reproduce an equivalent object.
         '''
-        return ascii(self.text)
+        return self.text
 
     def __str__(self):
         '''
         This functions converts the NormalizedStr into a regular string object.
         The output is similar, but not exactly the same, as the __repr__ function.
         '''
-        return unicodedata.normalize("NFD", self.text)
+        return str(self.text)
 
     def __len__(self):
         '''
         Returns the length of the string.
         The expression `len(a)` desugars to a.__len__().
         '''
-        return len(unicodedata.normalize("NFD", self.text))
+        return len(self.text)
 
     def __contains__(self, substr):
         '''
@@ -51,7 +51,7 @@ class NormalizedStr:
         HINT:
         You should normalize the `substr` variable to ensure that the comparison is done semantically and not syntactically.
         '''
-        return unicodedata.normalize("NFD", substr) in unicodedata.normalize("NFD", self.text)
+        return unicodedata.normalize("NFC", substr) in self.text
 
     def __getitem__(self, index):
         '''
@@ -64,13 +64,13 @@ class NormalizedStr:
         '''
         Returns a copy in the same normalized form, but lower case.
         '''
-        return unicodedata.normalize("NFD", self.text).lower()
+        return self.text.lower()
 
     def upper(self):
         '''
         Returns a copy in the same normalized form, but upper case.
         '''
-        return unicodedata.normalize("NFD", self.text).upper()
+        return self.text.upper()
 
     def __add__(self, b):
         '''
@@ -81,7 +81,7 @@ class NormalizedStr:
         The addition of two normalized strings is not guaranteed to stay normalized.
         Therefore, you must renormalize the strings after adding them together.
         '''
-        return unicodedata.normalize("NFD", self.text) + unicodedata.normalize("NFD", b)
+        return self.text + unicodedata.normalize("NFC", b)
 
     def __iter__(self):
         '''
