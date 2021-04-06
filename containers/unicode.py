@@ -20,14 +20,15 @@ class NormalizedStr:
     '''
 
     def __init__(self, text, normal_form='NFC'):
-        self.text = unicodedata.normalize("NFC", text)
+        self.normal_form = normal_form
+        self.text = unicodedata.normalize(self.normal_form, text)
 
     def __repr__(self):
         '''
         The string returned by the __repr__ function should be valid python code
         that can be substituted directly into the python interpreter to reproduce an equivalent object.
         '''
-        return self.text
+        return "NormalizedStr(" + self.text + ", " + self.normal_form + ")"
 
     def __str__(self):
         '''
@@ -41,7 +42,7 @@ class NormalizedStr:
         Returns the length of the string.
         The expression `len(a)` desugars to a.__len__().
         '''
-        return len(self.text)
+        return len(unicodedata.normalize(self.normal_form, self.text)
 
     def __contains__(self, substr):
         '''
@@ -51,7 +52,7 @@ class NormalizedStr:
         HINT:
         You should normalize the `substr` variable to ensure that the comparison is done semantically and not syntactically.
         '''
-        return unicodedata.normalize("NFC", substr) in self.text
+        return unicodedata.normalize(self.normal_form, substr) in self.text
 
     def __getitem__(self, index):
         '''
@@ -81,7 +82,7 @@ class NormalizedStr:
         The addition of two normalized strings is not guaranteed to stay normalized.
         Therefore, you must renormalize the strings after adding them together.
         '''
-        return self.text + unicodedata.normalize("NFC", b)
+        return self.text + unicodedata.normalize(self.normal_form, b)
 
     def __iter__(self):
         '''
