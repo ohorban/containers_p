@@ -95,4 +95,5 @@ class NormalizedStr:
 
 
 class NormalizedItr:
-    pass
+    def __innit__():
+        pass
