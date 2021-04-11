@@ -84,9 +84,6 @@ class BinaryTree():
         return traversal
 
     def inorder_print(self, start, traversal):
-        '''
-        Prints the nodes using a inorder traversal.
-        '''
         if start:
             traversal = self.inorder_print(start.left, traversal)
             traversal += str(start.value) + '-'
@@ -94,9 +91,6 @@ class BinaryTree():
         return traversal
 
     def postorder_print(self, start, traversal):
-        '''
-        Prints the nodes using a postorder traversal.
-        '''
         if start:
             traversal = self.postorder_print(start.left, traversal)
             traversal = self.postorder_print(start.right, traversal)
@@ -104,40 +98,36 @@ class BinaryTree():
         return traversal
 
     def to_list(self, traversal_type):
-        '''
-        This function is similar to the print_tree function,
-        but instead of printing the tree,
-        it returns the contents of the tree as a list.
-
-        A general programming principle is that a function should return its results
-        rather than print them whenever possible.
-        If a function returns its results,
-        we can always print the returned results if we need to visualize them.
-        But by returning the results we can also do more computations on the results if needed.
-        Many of the test cases for more complicated tree functions rely on this to_list function,
-        so it is import to implement it correctly.
-
-        FIXME:
-        Implement this function by modifying the _print functions above.
-        '''
+        if traversal_type == 'preorder':
+            return self.preorder(self.root, [])
+        if traversal_type == 'inorder':
+            return self.inorder(self.root, [])
+        if traversal_type == 'postorder':
+            return self.postorder(self.root, [])
+        else:
+            raise ValueError('Traversal type ' + str(traversal_type) + ' is not supported.')
 
     def preorder(self, start, traversal):
-        '''
-        FIXME:
-        Implement this function by modifying the _print functions above.
-        '''
+        if start:
+            traversal.append(start.value)
+            traversal = self.preorder(start.left, traversal)
+            traversal = self.preorder(start.right, traversal)
+        return traversal
+
 
     def inorder(self, start, traversal):
-        '''
-        FIXME:
-        Implement this function by modifying the _print functions above.
-        '''
+        if start:
+            traversal = self.inorder(start.left, traversal)
+            traversal.append(start.value)
+            traversal = self.inorder(start.right, traversal)
+        return traversal
 
     def postorder(self, start, traversal):
-        '''
-        FIXME:
-        Implement this function by modifying the _print functions above.
-        '''
+        if start:
+            traversal = self.postorder(start.left, traversal)
+            traversal = self.postorder(start.right, traversal)
+            traversal.append(start.value)
+        return traversal
 
     def __len__(self):
         '''
@@ -159,6 +149,14 @@ class BinaryTree():
         if a right child exists, add the result of __len__helper on the right child;
         return the sum of these three steps
         '''
+        counter = 0
+        if Node is None:
+            return counter
+        if node is not None and node.left:
+            counter += BinaryTree.__len__helper(node.left)
+        if node is not None and node.right:
+            counter += BinaryTree.__len__helper(node.right)
+        return 1 + counter
 
     def height(self):
         '''
@@ -171,7 +169,9 @@ class BinaryTree():
         HINT:
         See how the __len__ method calls its helper staticmethod.
         '''
-
+        return self._height(self.root)
+    
+    
     @staticmethod
     def _height(node):
         '''
@@ -184,3 +184,12 @@ class BinaryTree():
         if a right child exists, calculate the _height of the right child;
         return 1 (for the current node) plus the max of the left and right _heights calculated above
         '''
+        count_left = -1
+        count_right = -1
+        if node is None:
+            return -1
+        if node is not None and node.left:
+            count_left += BinaryTree._height(node.left)
+        if node is not None and node.right:
+            count_right += BinaryTree._height(node.right)
+        return 1 + max(count_left, count_right)
