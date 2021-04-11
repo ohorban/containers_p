@@ -114,7 +114,6 @@ class BinaryTree():
             traversal = self.preorder(start.right, traversal)
         return traversal
 
-
     def inorder(self, start, traversal):
         if start:
             traversal = self.inorder(start.left, traversal)
@@ -160,8 +159,7 @@ class BinaryTree():
 
     def height(self):
         return self._height(self.root)
-    
-    
+
     @staticmethod
     def _height(node):
         count_left = -1
