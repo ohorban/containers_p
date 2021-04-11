@@ -150,7 +150,7 @@ class BinaryTree():
         return the sum of these three steps
         '''
         counter = 0
-        if Node is None:
+        if not node:
             return counter
         if node is not None and node.left:
             counter += BinaryTree.__len__helper(node.left)
@@ -159,37 +159,17 @@ class BinaryTree():
         return 1 + counter
 
     def height(self):
-        '''
-        Returns the height of the tree.
-        Recall that the height is the maximum length from the root to a leaf node.
-
-        FIXME:
-        Implement this function.
-
-        HINT:
-        See how the __len__ method calls its helper staticmethod.
-        '''
         return self._height(self.root)
     
     
     @staticmethod
     def _height(node):
-        '''
-        FIXME:
-        Implement this function.
-
-        HINT:
-        The pseudocode is:
-        if a left child exists, calculate the _height of the left child;
-        if a right child exists, calculate the _height of the right child;
-        return 1 (for the current node) plus the max of the left and right _heights calculated above
-        '''
         count_left = -1
         count_right = -1
-        if node is None:
+        if not node:
             return -1
-        if node is not None and node.left:
-            count_left += BinaryTree._height(node.left)
-        if node is not None and node.right:
-            count_right += BinaryTree._height(node.right)
+        if node.left:
+            count_left = BinaryTree._height(node.left)
+        if node.right:
+            count_right = BinaryTree._height(node.right)
         return 1 + max(count_left, count_right)
