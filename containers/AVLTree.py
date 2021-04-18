@@ -43,7 +43,6 @@ class AVLTree(BST):
         tempNode.right = newNode.left
         newNode.left = tempNode
         return tempNode
-        
 
     @staticmethod
     def _right_rotate(node):
@@ -54,18 +53,6 @@ class AVLTree(BST):
         return tempNode
 
     def insert(self, value):
-        '''
-        FIXME:
-        Implement this function.
-        The lecture videos provide a high-level overview of how to insert into an AVL tree,
-        and the textbook provides full python code.
-        The textbook's class hierarchy for their AVL tree code is fairly different from our class hierarchy,
-        however, so you will have to adapt their code.
-        HINT:
-        It is okay to add @staticmethod helper functions for this code.
-        The code should look very similar to the code for your insert function for the BST,
-        but it will also call the left and right rebalancing functions.
-        '''
         if not self.root:
             self.root = Node(value)
         else:
@@ -97,7 +84,6 @@ class AVLTree(BST):
             node.left = self.rebalance(node.left)
             node.right = self.rebalance(node.right)
         return node
-
 
     @staticmethod
     def _rebalance(node):
