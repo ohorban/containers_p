@@ -38,48 +38,66 @@ class AVLTree(BST):
 
     @staticmethod
     def _left_rotate(node):
-        tempNode = node
-        newNode = tempNode.right
-        tempNode.right = newNode.left
-        newNode.left = tempNode
-        return tempNode
+        tempval = node.value
+        tempright = node.right
+        if tempright:
+            templeft = tempright.left
+        else:
+            templeft = None
+        node.value = tempright.value
+        node.right = tempright.right
+        tempright = node.left
+        node.left = Node(tempval, tempright, templeft)
+        return node
 
     @staticmethod
     def _right_rotate(node):
-        tempNode = node
-        newNode = tempNode.left
-        tempNode.left = newNode.right
-        newNode.right = tempNode
-        return tempNode
+        tempval = node.value
+        templeft = node.left
+        if templeft:
+            tempright = templeft.right
+        else:
+            tempright = None
+        node.value = templeft.value
+        node.left = templeft.left
+        templeft = node.right
+        node.right = Node(tempval, tempright, templeft)
+        return node
 
     def insert(self, value):
         if not self.root:
             self.root = Node(value)
+            return
+        if value == self.root.value:
+            return
         else:
-            AVLTree._insert(value, self.root)
-            self.rebalance(self.root)
+            self._insert(value, self.root)
+            while not self.is_avl_satisfied():
+                self.root = self.rebalance(self.root)
             return
 
     @staticmethod
     def _insert(value, node):
-        if node.value >= value:
-            if node.left:
-                AVLTree._insert(value, node.left)
-            else:
+        if node.value == value:
+            return
+        if value < node.value:
+            if node.left is None:
                 node.left = Node(value)
                 return
-        elif node.value < value:
-            if node.right:
-                AVLTree._insert(value, node.right)
             else:
+                return AVLTree._insert(value, node.left)
+        else:
+            if node.right is None:
                 node.right = Node(value)
                 return
+            else:
+                return AVLTree._insert(value, node.right)
 
     def rebalance(self, node):
-        if not node:
+        if node is None:
             return
         if self._balance_factor(node) == -2 or self._balance_factor(node) == 2:
-            node = AVLTree._rebalance(node)
+            node = self._rebalance(node)
         else:
             node.left = self.rebalance(node.left)
             node.right = self.rebalance(node.right)
@@ -87,23 +105,16 @@ class AVLTree(BST):
 
     @staticmethod
     def _rebalance(node):
-        '''
-        There are no test cases for the rebalance function,
-        so you do not technically have to implement it.
-        But both the insert function needs the rebalancing code,
-        so I recommend including that code here.
-        '''
         if node is None:
             return
-        factor = AVLTree._balance_factor(node)
-        if factor < 0:
+        if AVLTree._balance_factor(node) < 0:
             if AVLTree._balance_factor(node.right) > 0:
                 node.right = AVLTree._right_rotate(node.right)
                 node = AVLTree._left_rotate(node)
             else:
                 node = AVLTree._left_rotate(node)
             return node
-        elif factor > 0:
+        elif AVLTree._balance_factor(node) > 0:
             if AVLTree._balance_factor(node.left) < 0:
                 node.left = AVLTree._left_rotate(node.left)
                 node = AVLTree._right_rotate(node)
