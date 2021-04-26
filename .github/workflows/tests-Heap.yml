@@ -24,6 +24,7 @@ jobs:
         run: |
           pip3 install flake8 pep8-naming
           flake8 containers/Heap.py --ignore=E501
+          flake8 containers/Heap.py --ignore=W504
       - name: Run tests
         run: |
           python -m pytest tests/test_Heap.py
