@@ -107,14 +107,14 @@ class Heap(BinaryTree):
                 node.left = None
             else:
                 value, node.left = Heap._remove_bottom_right(
-                        node.left, position[1:])
+                    node.left, position[1:])
         if position[0] == '1':
             if len(position) == 1:
                 value = node.right.value
                 node.right = None
             else:
                 value, node.right = Heap._remove_bottom_right(
-                        node.right, position[1:])
+                    node.right, position[1:])
         return value, node
 
     @staticmethod
