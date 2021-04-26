@@ -22,8 +22,7 @@ class Heap(BinaryTree):
             return True
         ret = True
         if node.left and node.right:
-            if (node.left.value >= node.value and
-                    node.right.value >= node.value):
+            if node.left.value >= node.value and node.right.value >= node.value:
                 ret = True
             else:
                 ret = False
