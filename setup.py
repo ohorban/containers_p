@@ -9,8 +9,8 @@ README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
 setup(
-    name="cmc_csci046_ohorban_containers",
-    version="1.0.0",
+    name="cmc_csci046_ohorban_container",
+    version="0.0.1",
     description="Data structures: BST, AVL, Heap, unicode",
     long_description=README,
     long_description_content_type="text/markdown",
